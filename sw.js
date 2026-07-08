@@ -1,7 +1,7 @@
 /* 有数 youshu Service Worker
    缓存策略:App Shell 全量预缓存,之后离线可用。
    发新版本时把 VERSION +1,旧缓存会在 activate 时清掉。 */
-var VERSION = 'youshu-v8.1.2';
+var VERSION = 'youshu-v8.1.3';
 var SHELL = [
   './',
   './index.html',
