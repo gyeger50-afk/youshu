@@ -57,6 +57,8 @@
     background:linear-gradient(180deg,#FFFFFF,#FBF8F2);box-shadow:0 2px 8px rgba(60,50,35,.08),inset 0 1px 0 #fff;}
   .iconbtn:active{transform:scale(.86);}
   .h-title{font-family:var(--serif);font-size:27px;font-weight:700;letter-spacing:1px;}
+  .h-group{display:flex;align-items:baseline;gap:9px;min-width:0;}
+  .h-date{font-family:var(--num);font-size:12.5px;color:var(--gray3);letter-spacing:.4px;white-space:nowrap;}
   .h-chip{background:var(--line-light);border-radius:7px;padding:3px 8px;font-size:11.5px;color:var(--gray2);font-family:var(--num);}
 
   .week{display:flex;padding:0 12px;}
@@ -86,6 +88,13 @@
   .ml-title{font-size:15.5px;font-weight:500;flex:1;letter-spacing:.2px;color:#26241F;}
   .ml-card.donecard .ml-title{color:var(--gray3);text-decoration:line-through;}
   .ml-ghost{border:1.5px dashed var(--line-deep);background:transparent;box-shadow:none;padding:16px;text-align:center;color:var(--gray4);font-size:13px;cursor:pointer;}
+  /* 主线空状态:带印章的邀请卡,而不是一条干巴巴的虚线 */
+  .ml-ghost2{padding:13px 16px 15px;cursor:pointer;background:linear-gradient(180deg,#FDFAF4,#FBF6EE);border:1.5px dashed #E6D8C8;box-shadow:none;transition:transform .25s var(--boing),border-color .2s;}
+  .ml-ghost2:active{transform:scale(.98);}
+  .mlg-seal{display:inline-flex;align-items:center;gap:4px;border:.5px dashed rgba(194,66,31,.45);border-radius:6px;padding:3px 8px;color:rgba(194,66,31,.7);}
+  .mlg-seal b{font-size:10.5px;font-weight:600;letter-spacing:1px;}
+  .mlg-q{font-family:var(--serif);font-size:16px;font-weight:700;color:#4A463F;margin-top:10px;letter-spacing:.3px;}
+  .mlg-sub{font-size:11.5px;color:var(--gray4);margin-top:4px;}
 
   /* 立体专注按钮 */
   .focus-chip{position:relative;margin-left:auto;display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 13px 6px;font-size:11.5px;color:var(--gray1);cursor:pointer;overflow:hidden;font-weight:600;
@@ -393,6 +402,7 @@
   .rollic{flex:none;}
 
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:14px 16px 0;background:var(--line-light);border:.5px solid var(--line-light);border-radius:18px;overflow:hidden;}
+  .grid2>.dcell:last-child:nth-child(odd){grid-column:1/-1;} /* 剩余天数为奇数时,最后一格铺满整行,不留灰洞 */
   .dcell{background:linear-gradient(180deg,#FFFFFF,#FDFBF7);padding:12px 10px 12px 8px;min-height:106px;transition:box-shadow .2s,transform .2s var(--boing);position:relative;}
   .dcell.hover{box-shadow:inset 0 0 0 1.5px rgba(232,84,47,.55);background:rgba(232,84,47,.04);transform:scale(1.01);z-index:1;}
   .dcell .dh{display:flex;align-items:baseline;gap:5px;margin-bottom:4px;padding-left:6px;}
@@ -1018,7 +1028,7 @@
       <div class="iconbtn" onclick="openDrawer()">
         <svg width="15" height="12" viewBox="0 0 15 12"><g stroke="#6E6A64" stroke-width="1.6" stroke-linecap="round"><line x1="1" y1="1" x2="14" y2="1"/><line x1="1" y1="6" x2="10" y2="6"/><line x1="1" y1="11" x2="14" y2="11"/></g></svg>
       </div>
-      <div class="h-title" id="tdTitle">今天</div>
+      <div class="h-group"><div class="h-title" id="tdTitle">今天</div><span class="h-date" id="tdDate"></span></div>
       <div class="iconbtn" style="margin-left:auto" onclick="openIsheet()">
         <svg width="17" height="15" viewBox="0 0 18 16"><path d="M2 6 L4.5 1.5 h9 L16 6 v7 a1.5 1.5 0 0 1 -1.5 1.5 h-11 A1.5 1.5 0 0 1 2 13 Z" fill="none" stroke="#6E6A64" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 6.5 h4.5 a2.5 2.5 0 0 0 5 0 H16" fill="none" stroke="#6E6A64" stroke-width="1.5"/></svg>
       </div>
@@ -1039,7 +1049,7 @@
         <svg width="15" height="12" viewBox="0 0 15 12"><g stroke="#6E6A64" stroke-width="1.6" stroke-linecap="round"><line x1="1" y1="1" x2="14" y2="1"/><line x1="1" y1="6" x2="10" y2="6"/><line x1="1" y1="11" x2="14" y2="11"/></g></svg>
       </div>
       <div class="h-title">本周</div>
-      <span class="h-chip" id="hMonth">6月</span><span class="h-chip" id="hWeek">24周</span>
+      <span class="h-date" id="hDate">6月 · 第 24 周</span>
       <div class="iconbtn" style="margin-left:auto" onclick="openIsheet()">
         <svg width="17" height="15" viewBox="0 0 18 16"><path d="M2 6 L4.5 1.5 h9 L16 6 v7 a1.5 1.5 0 0 1 -1.5 1.5 h-11 A1.5 1.5 0 0 1 2 13 Z" fill="none" stroke="#6E6A64" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 6.5 h4.5 a2.5 2.5 0 0 0 5 0 H16" fill="none" stroke="#6E6A64" stroke-width="1.5"/></svg>
       </div>
@@ -1952,7 +1962,9 @@ function isFold(d,b){
   return false;
 }
 function renderToday(){
-  $('tdTitle').textContent=selDay===TODAY?'今天':'周'+DAYS.find(function(o){return o.d===selDay}).w+' · '+selDay+' 日';
+  var selRef=DAYS.find(function(o){return o.d===selDay});
+  $('tdTitle').textContent=selDay===TODAY?'今天':'周'+selRef.w;
+  var td=$('tdDate');if(td)td.textContent=dayLabel(selDay)+(selDay===TODAY?' · 周'+selRef.w:'');
   $('fpText').textContent=focusList.length?('重点 · '+focusList[0]+(focusList.length>1?'  +'+(focusList.length-1):'')):'给这周设 1-3 个重点 · 点这里';
   var slot=$('mlSlot');
   var m=main[selDay];
@@ -1965,10 +1977,13 @@ function renderToday(){
     slot.querySelector('.ml-title').onclick=function(){openEditor({o:m,d:selDay,b:null,isMain:true});};
     if(selDay===TODAY)bindFocusChip();
   }else{
-    slot.innerHTML='<div class="card ml-ghost">＋ 给这天设一条主线</div>';
+    slot.innerHTML='<div class="card ml-ghost2">'
+      +'<span class="mlg-seal"><svg width="9" height="11" viewBox="0 0 12 13"><path d="M1 1 v11 M1 1.5 h8 l-2 2.5 2 2.5 h-8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><b>主线 · 还空着</b></span>'
+      +'<div class="mlg-q">'+(selDay===TODAY?'今天':'这天')+'最想做成的一件事是？</div>'
+      +'<div class="mlg-sub">点这里写下 · 一天只有一条，做完这天就值了</div></div>';
     slot.firstChild.onclick=function(){
       var el=slot.firstChild;
-      el.innerHTML='<input class="edit-in" style="text-align:center" placeholder="写一条主线…">';
+      el.innerHTML='<input class="edit-in" placeholder="写一条主线…">';
       var inp=el.querySelector('input');inp.focus();
       function save(){if(inp.value.trim()){main[selDay]={t:inp.value.trim(),done:0};snd.thip();}renderToday();renderWeek();}
       inp.onblur=save;inp.onkeydown=function(e){if(e.key==='Enter')inp.blur();};
@@ -3677,8 +3692,7 @@ if(IS_DEMO){
 /* 状态栏时钟 + 周数 / 月份 / 抽屉统计等"壳层"信息 */
 function refreshChrome(){
   document.querySelectorAll('.statusbar>span:first-child').forEach(function(s){s.textContent=IS_DEMO?'16:24':nowStr();});
-  var hm=$('hMonth');if(hm)hm.textContent=parseInt(WK.monthName,10)+'月';
-  var hw=$('hWeek');if(hw)hw.textContent=WK.weekNum+'周';
+  var hd=$('hDate');if(hd)hd.textContent=parseInt(WK.monthName,10)+'月 · 第 '+WK.weekNum+' 周';
   var rw=$('rwLabel');if(rw)rw.textContent=WK.year+' · 第 '+WK.weekNum+' 周';
   var dn=$('dName');if(dn&&dn.firstChild){var h=new Date().getHours();dn.firstChild.textContent=(h<5?'夜深了 ':h<11?'早上好 ':h<13?'中午好 ':h<18?'下午好 ':'晚上好 ');}
   var ds=$('dSub2');if(ds){var n=0;DAYS.forEach(function(o){n+=doneCount(o.d);});ds.textContent='第 '+WK.weekNum+' 周 · 本周完成 '+n+' 件';}
